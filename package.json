@@ -28,9 +28,13 @@
     "react-dom": "18.3.1",
     "react-hook-form": "^7.46.1",
     "react-icons": "^4.11.0",
+    "react-loading-skeleton": "^3.3.1",
     "react-simplemde-editor": "^5.2.0",
     "tailwindcss": "3.4.10",
     "typescript": "5.5.4",
     "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "delay": "^6.0.0"
   }
 }
