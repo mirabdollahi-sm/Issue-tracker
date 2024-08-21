@@ -21,25 +21,26 @@ const LoadingIssuesPage = () => {
             </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
-        {issuses.map((issue) => {
-          return (
-            <Table.Row key={issue}>
-              <Table.Cell>
-                <Skeleton />
-                <div className="block md:hidden">
+        <Table.Body>
+          {issuses.map((issue) => {
+            return (
+              <Table.Row key={issue}>
+                <Table.Cell>
                   <Skeleton />
-                </div>
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                <Skeleton />
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                <Skeleton />
-              </Table.Cell>
-            </Table.Row>
-          );
-        })}
-        <Table.Body></Table.Body>
+                  <div className="block md:hidden">
+                    <Skeleton />
+                  </div>
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  <Skeleton />
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  <Skeleton />
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
       </Table.Root>
     </div>
   );
