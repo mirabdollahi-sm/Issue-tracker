@@ -1,16 +1,12 @@
-/* eslint-disable @next/next/no-async-client-component */
-"use client";
-
 import React from "react";
 import { Table } from "@radix-ui/themes";
-import prisma from "@/prisma/client";
+import prisma from '@/prisma/client';
 import IssueStatusBadge from "../components/IssueStatusBadge";
-import delay from 'delay'
 import IssueActions from "./IssueActions";
+import Link from "next/link";
 
 const IssuesPage = async () => {
-  const issuses = await prisma.issue.findMany();
-  await delay(2000);
+  const issues = await prisma.issue.findMany()
   return (
     <div>
       <IssueActions />
@@ -26,25 +22,28 @@ const IssuesPage = async () => {
             </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
-        {issuses.map((issue) => {
-          return (
-            <Table.Row key={issue.id}>
-              <Table.Cell>
-                {issue.title}
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status} />
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
-              </Table.Cell>
-            </Table.Row>
-          );
-        })}
-        <Table.Body></Table.Body>
+        <Table.Body>
+          {issues.map((issue) => {
+            return (
+              <Table.Row key={issue.id}>
+                <Table.Cell>
+                  <Link href={`/issues/${issue.id}`}>
+                    {issue.title}
+                  </Link>
+                  <div className="block md:hidden">
+                    <IssueStatusBadge status={"OPEN"} />
+                  </div>
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  <IssueStatusBadge status={"OPEN"} />
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  {issue.createdAt.toDateString()}
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
       </Table.Root>
     </div>
   );

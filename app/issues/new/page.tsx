@@ -25,7 +25,7 @@ const NewIssuePage = () => {
 
   const [error, setError] = useState("");
   const router = useRouter();
-  let [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
