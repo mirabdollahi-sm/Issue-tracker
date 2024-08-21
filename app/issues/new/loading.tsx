@@ -1,10 +1,14 @@
+import { Button, Spinner, Box } from "@radix-ui/themes";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const LoadingNewIssuePage = () => {
-  const issuses = [1, 2, 3, 4, 5];
   return (
-    <div>
-      Loading new issue page
-    </div>
+    <Box width="m-w-xl">
+      <Skeleton />
+      <Skeleton height='20rem' />
+      <Button><Spinner /></Button>
+    </Box>
   );
 };
 
