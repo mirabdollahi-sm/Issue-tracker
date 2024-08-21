@@ -1,8 +1,9 @@
 "use client";
 
-import { TextField, Button, Callout, TextArea, Text } from "@radix-ui/themes";
+import { TextField, Button, Callout, TextArea } from "@radix-ui/themes";
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import dynamic from "next/dynamic";
+import { useForm, Controller } from "react-hook-form";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,12 +13,15 @@ import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
+
 type IssueForm = z.infer<typeof createIssueSchema>;
 
 const NewIssuePage = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
@@ -37,7 +41,7 @@ const NewIssuePage = () => {
       setError("An unexpected error occurred.");
     }
   })
-  
+
   return (
     <div>
       {error && (
@@ -54,7 +58,13 @@ const NewIssuePage = () => {
           {...register("title")}
         ></TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <TextArea placeholder="Description..." {...register("description")} />
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder="Description" {...field} />
+          )}
+        />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={submitting}>Submit{submitting && <Spinner />}</Button>
       </form>
