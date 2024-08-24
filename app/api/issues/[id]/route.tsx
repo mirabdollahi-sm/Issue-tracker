@@ -36,6 +36,7 @@ export async function DELETE(
   { params }: { params: { id: number } }
 ) {
   let id = +params.id;
+  console.log(id);
   const issue = await prisma.issue.findUnique({
     where: { id },
   });
@@ -45,6 +46,7 @@ export async function DELETE(
   await prisma.issue.delete({
     where: { id },
   });
-
+  console.log('by');
+  
   return NextResponse.json({});
 }
